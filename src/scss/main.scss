@@ -240,7 +240,7 @@ a {
     .right-card {
       display: flex;
       flex: 1;
-      background-image: url("/src/assets/images/right-card.svg");
+      background-image: url("/assets/images/right-card.svg");
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -343,7 +343,7 @@ a {
           transform 0.5s ease,
           box-shadow 0.5s ease;
 
-        @include mixin.image-card("/src/assets/images/travel-suitcase-1.svg");
+        @include mixin.image-card("/assets/images/travel-suitcase-1.svg");
 
         @media (max-width: v.$breakpoint-lg) {
           width: 80%;
@@ -452,15 +452,15 @@ a {
         }
 
         &--2 {
-          @include mixin.image-card("/src/assets/images/travel-suitcase-2.svg");
+          @include mixin.image-card("/assets/images/travel-suitcase-2.svg");
         }
 
         &--3 {
-          @include mixin.image-card("/src/assets/images/travel-suitcase-3.svg");
+          @include mixin.image-card("/assets/images/travel-suitcase-3.svg");
         }
 
         &--4 {
-          @include mixin.image-card("/src/assets/images/travel-suitcase-4.svg");
+          @include mixin.image-card("/assets/images/travel-suitcase-4.svg");
         }
       }
     }
@@ -468,7 +468,7 @@ a {
 
   &__banner {
     box-shadow: 0 20px 80px 0 rgb(193 199 212 / 70.2%);
-    background-image: url("/src/assets/images/banner.svg");
+    background-image: url("/assets/images/banner.svg");
     background-size: auto;
     background-repeat: no-repeat;
     background-position: center;
@@ -840,3 +840,4 @@ label.required {
   white-space: nowrap;
   width: 1px;
 }
+

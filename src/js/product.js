@@ -41,9 +41,9 @@ export const getProductRatingHTMLElement = (product) => {
     const hasGreaterRating = roundedProductRating >= i;
 
     if (hasGreaterRating) {
-      img.src = "../assets/images/gold-star.svg";
+      img.src = "/assets/images/gold-star.svg";
     } else {
-      img.src = "../assets/images/gray-star.svg";
+      img.src = "/assets/images/gray-star.svg";
     }
 
     productRatingContainer.appendChild(img);

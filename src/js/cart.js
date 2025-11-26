@@ -166,7 +166,7 @@ const createCartRow = (product, productTotal) => {
   deleteButton.className = "delete-btn";
 
   const deleteImg = document.createElement("img");
-  deleteImg.src = "../assets/images/cart-bin.svg";
+  deleteImg.src = "/assets/images/cart-bin.svg";
   deleteImg.alt = "Delete";
 
   deleteButton.appendChild(deleteImg);
