@@ -5,7 +5,7 @@ const SELECTED_PRODUCT_STORAGE_KEY = "selectedProductLocalStorageKey";
 
 export async function loadJsonData() {
   try {
-    const response = await fetch("/src/assets/data.json");
+    const response = await fetch("/assets/data.json");
     return await response.json();
   } catch (error) {
     console.error("Error loading json data: ", error);
