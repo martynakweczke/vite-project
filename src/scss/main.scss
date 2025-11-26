@@ -1,0 +1,842 @@
+@use "base/reset";
+@use "base/_fonts" as f;
+@use "layouts/header";
+@use "layouts/footer";
+@use "abstracts/_variables" as v;
+@use "abstracts/_mixins" as mixin;
+@use "components/buttons";
+@use "components/forms";
+@use "components/product-card";
+@use "pages/cart";
+@use "pages/about";
+@use "pages/contact";
+@use "pages/catalog";
+@use "pages/product-details";
+
+a {
+  @include mixin.link-primary;
+}
+
+.login-modal {
+  border: none;
+  padding: 50px 70px;
+  text-align: left;
+  box-shadow: 0 10px 40px rgb(0 0 0 / 10%);
+  background-color: v.$color-background;
+
+  @media (min-width: v.$breakpoint-md) {
+    width: 480px;
+  }
+
+  #login-form {
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-unit * 4;
+
+    .form-group {
+      gap: v.$spacing-unit * 1.5;
+    }
+
+    .login-actions-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      a {
+        font-size: 9px;
+        color: v.$color-primary;
+        font-weight: 700;
+      }
+    }
+
+    .checkbox-remember {
+      display: flex;
+      align-items: center;
+
+      label {
+        font-size: 9px;
+        color: v.$color-text-hint;
+        cursor: pointer;
+      }
+
+      input[type="checkbox"] {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      padding: 10px 40px 10px 12px;
+    }
+
+    .password-wrapper {
+      position: relative;
+
+      #toggle-password {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: v.$text-base;
+        opacity: 0.7;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    .login-button {
+      width: 100%;
+      font-size: v.$text-xs;
+    }
+  }
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__first-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: v.$color-background-first-part;
+    width: 100vw;
+
+    &-container {
+      @include mixin.container;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+      @media (min-width: v.$breakpoint-md) and (max-width: v.$breakpoint-lg) {
+        @include mixin.container(50px 200px);
+      }
+
+      @media (max-width: v.$breakpoint-md) {
+        @include mixin.container(50px 100px);
+      }
+    }
+
+    &-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: v.$spacing-unit * 2.5;
+
+      p {
+        color: v.$color-description;
+      }
+
+      @media (max-width: v.$breakpoint-md) {
+        p {
+          font-size: v.$text-xs;
+        }
+
+        h1 {
+          font-size: v.$text-4xl;
+        }
+
+        .button-primary {
+          font-size: 10px;
+        }
+      }
+    }
+
+    &-image {
+      img {
+        height: 600px;
+        width: 600px;
+
+        @media (min-width: v.$breakpoint-lg) and (max-width: v.$breakpoint-2xl) {
+          height: 500px;
+          width: 500px;
+        }
+
+        @media (max-width: v.$breakpoint-lg) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &__two-part {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: -100px auto 0;
+    background-color: v.$color-background;
+    box-shadow: 0 20px 80px 0 rgb(193 199 212 / 70.2%);
+    max-width: 1300px;
+
+    @media (max-width: v.$breakpoint-lg) {
+      flex-direction: column;
+      margin: -20px auto 0;
+    }
+
+    .left-card {
+      flex: 1;
+      padding: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: v.$spacing-unit * 3;
+
+      .profile-chief {
+        display: flex;
+        align-items: center;
+        gap: v.$spacing-unit * 2;
+
+        &-text {
+          display: flex;
+          flex-direction: column;
+
+          .profile-chief-name {
+            font-weight: 700;
+            font-size: v.$text-xl;
+            color: v.$color-text;
+          }
+
+          p {
+            color: v.$color-text;
+          }
+
+          @media (max-width: v.$breakpoint-md) {
+            .profile-chief-name {
+              font-size: v.$text-base;
+            }
+
+            p {
+              font-size: v.$text-xs;
+            }
+          }
+        }
+      }
+
+      p {
+        color: v.$color-description;
+      }
+
+      @media (max-width: v.$breakpoint-md) {
+        h2 {
+          font-size: v.$text-3xl;
+        }
+
+        p {
+          font-size: v.$text-xs;
+        }
+      }
+    }
+
+    .right-card {
+      display: flex;
+      flex: 1;
+      background-image: url("/src/assets/images/right-card.svg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      padding: 70px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgb(0 0 0 / 40%);
+        z-index: 0;
+      }
+
+      &-elements {
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        color: v.$color-text-secondary;
+        gap: v.$spacing-unit * 3.5;
+
+        @media (max-width: v.$breakpoint-md) {
+          h2 {
+            font-size: v.$text-3xl;
+          }
+
+          p {
+            font-size: v.$text-xs;
+          }
+
+          .button-primary {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  &__three-part {
+    @include mixin.container;
+
+    width: 100%;
+
+    @media (min-width: v.$breakpoint-lg) and (max-width: v.$breakpoint-2xl) {
+      @include mixin.container(115px 150px);
+    }
+
+    @media (min-width: v.$breakpoint-md) and (max-width: v.$breakpoint-lg) {
+      @include mixin.container(115px 50px);
+
+      padding-bottom: 0;
+    }
+
+    @media (max-width: v.$breakpoint-md) {
+      @include mixin.container(80px 45px);
+
+      padding-bottom: 0;
+    }
+
+    &-text {
+      margin-bottom: v.$spacing-unit * 7.5;
+      text-align: center;
+
+      @media (max-width: v.$breakpoint-md) {
+        margin-bottom: 30px;
+
+        h2 {
+          font-size: v.$text-2xl;
+        }
+
+        p {
+          font-size: v.$text-xs;
+        }
+      }
+
+      p {
+        color: v.$color-description;
+      }
+    }
+
+    &-images {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      justify-items: center;
+      gap: v.$spacing-unit * 4.5;
+
+      @media (max-width: v.$breakpoint-lg) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: v.$spacing-unit * 0.5;
+      }
+
+      .image-card {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 2;
+        overflow: hidden;
+        transition:
+          transform 0.5s ease,
+          box-shadow 0.5s ease;
+
+        @include mixin.image-card("/src/assets/images/travel-suitcase-1.svg");
+
+        @media (max-width: v.$breakpoint-lg) {
+          width: 80%;
+          height: 80%;
+        }
+
+        &:hover {
+          transform: scale(1.05);
+          box-shadow: 0 10px 30px rgb(0 0 0 / 30%);
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: rgb(0 0 0 / 40%);
+          z-index: 0;
+        }
+
+        &::after {
+          content: attr(data-random-text);
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: v.$color-primary-contrast;
+          font-size: v.$text-lg;
+          font-weight: 700;
+          background: rgb(0 0 0 / 60%);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          text-align: center;
+          padding: v.$spacing-unit * 2;
+        }
+
+        &:hover::after {
+          opacity: 0.8;
+        }
+
+        .image-card-text {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          color: v.$color-text-secondary;
+          padding: v.$spacing-unit * 4.5;
+          gap: v.$spacing-unit * 2.5;
+          bottom: 0;
+          left: 0;
+
+          @media (min-width: v.$breakpoint-lg) and (max-width: v.$breakpoint-2xl) {
+            padding: v.$spacing-unit * 5;
+          }
+
+          @media (min-width: v.$breakpoint-md) and (max-width: v.$breakpoint-lg) {
+            padding: v.$spacing-unit * 5;
+          }
+
+          @media (max-width: v.$breakpoint-md) {
+            padding: v.$spacing-unit * 1;
+          }
+
+          h3 {
+            line-height: 1.4;
+          }
+
+          p {
+            font-size: v.$text-lg;
+            line-height: 1.3;
+          }
+
+          @media (min-width: v.$breakpoint-lg) and (max-width: v.$breakpoint-2xl) {
+            h3 {
+              font-size: v.$text-xs;
+              line-height: 1.4;
+            }
+
+            p {
+              font-size: v.$text-xs;
+              line-height: 1.4;
+            }
+          }
+
+          @media (min-width: v.$breakpoint-md) and (max-width: v.$breakpoint-lg) {
+            h3 {
+              font-size: v.$text-base;
+              line-height: 1.3;
+            }
+
+            p {
+              font-size: v.$text-base;
+              line-height: 1.3;
+            }
+          }
+
+          @media (max-width: v.$breakpoint-md) {
+            h3 {
+              font-size: v.$text-base;
+              line-height: 1.5;
+            }
+
+            p {
+              display: none;
+            }
+          }
+        }
+
+        &--2 {
+          @include mixin.image-card("/src/assets/images/travel-suitcase-2.svg");
+        }
+
+        &--3 {
+          @include mixin.image-card("/src/assets/images/travel-suitcase-3.svg");
+        }
+
+        &--4 {
+          @include mixin.image-card("/src/assets/images/travel-suitcase-4.svg");
+        }
+      }
+    }
+  }
+
+  &__banner {
+    box-shadow: 0 20px 80px 0 rgb(193 199 212 / 70.2%);
+    background-image: url("/src/assets/images/banner.svg");
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    width: 80%;
+    max-width: 1300px;
+    margin: 0 auto;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgb(0 0 0 / 40%);
+      z-index: 0;
+    }
+
+    &-text {
+      color: v.$color-text-secondary;
+      gap: v.$spacing-unit * 18;
+      padding: v.$spacing-unit * 5 v.$spacing-unit * 17.5;
+      display: flex;
+
+      @media (min-width: v.$breakpoint-md) and (max-width: v.$breakpoint-lg) {
+        flex-direction: column;
+        gap: v.$spacing-unit * 3;
+      }
+
+      @media (max-width: v.$breakpoint-md) {
+        flex-direction: column;
+        gap: v.$spacing-unit * 1;
+        padding: v.$spacing-unit * 2.5 v.$spacing-unit * 2.5;
+      }
+    }
+
+    &-left {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      text-align: center;
+      z-index: 1;
+
+      .promo-text {
+        font-size: 220px;
+        font-weight: 900;
+        line-height: 1.1;
+
+        @media (min-width: v.$breakpoint-lg) and (max-width: v.$breakpoint-2xl) {
+          font-size: 120px;
+          font-weight: 900;
+          line-height: 1.1;
+        }
+
+        @media (min-width: v.$breakpoint-md) and (max-width: v.$breakpoint-lg) {
+          font-size: 85px;
+          font-weight: 900;
+          line-height: 1;
+        }
+
+        @media (max-width: v.$breakpoint-md) {
+          font-size: 55px;
+          line-height: 1;
+        }
+      }
+
+      p {
+        font-size: v.$text-xl;
+        line-height: 1.5;
+
+        @media (min-width: v.$breakpoint-md) and (max-width: v.$breakpoint-lg) {
+          font-size: v.$text-xs;
+          line-height: 1;
+        }
+
+        @media (max-width: v.$breakpoint-md) {
+          font-size: 10px;
+        }
+      }
+    }
+
+    &-right {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      z-index: 1;
+      gap: v.$spacing-unit * 1;
+      justify-content: center;
+
+      h2 {
+        line-height: 1;
+
+        @media (min-width: v.$breakpoint-md) and (max-width: v.$breakpoint-lg) {
+          font-size: v.$text-lg;
+        }
+
+        @media (min-width: v.$breakpoint-lg) and (max-width: v.$breakpoint-2xl) {
+          font-size: v.$text-2xl;
+        }
+
+        @media (max-width: v.$breakpoint-md) {
+          font-size: v.$text-sm;
+        }
+      }
+
+      p {
+        font-size: v.$text-base;
+        line-height: 1;
+
+        @media (min-width: v.$breakpoint-md) and (max-width: v.$breakpoint-lg) {
+          font-size: v.$text-xs;
+        }
+
+        @media (min-width: v.$breakpoint-lg) and (max-width: v.$breakpoint-2xl) {
+          font-size: v.$text-xs;
+        }
+
+        @media (max-width: v.$breakpoint-md) {
+          font-size: 10px;
+        }
+      }
+
+      @media (min-width: v.$breakpoint-md) and (max-width: v.$breakpoint-lg) {
+        .button-primary {
+          font-size: 8px;
+        }
+      }
+
+      @media (min-width: v.$breakpoint-lg) and (max-width: v.$breakpoint-2xl) {
+        .button-primary {
+          font-size: 10px;
+          padding: v.$spacing-unit * 1.5;
+        }
+      }
+
+      @media (max-width: v.$breakpoint-md) {
+        .button-primary {
+          font-size: 10px;
+          padding: v.$spacing-unit * 1;
+        }
+      }
+    }
+  }
+
+  &__customers {
+    @include mixin.container;
+
+    text-align: center;
+
+    @media (min-width: v.$breakpoint-lg) and (max-width: v.$breakpoint-2xl) {
+      @include mixin.container(115px 150px);
+
+      padding-top: 0;
+    }
+
+    @media (min-width: v.$breakpoint-md) and (max-width: v.$breakpoint-lg) {
+      @include mixin.container(115px 80px);
+
+      padding-top: 0;
+    }
+
+    @media (max-width: v.$breakpoint-md) {
+      @include mixin.container(80px 80px);
+
+      padding-top: 0;
+    }
+
+    &-title {
+      p {
+        color: v.$color-description;
+      }
+
+      @media (max-width: v.$breakpoint-md) {
+        margin-bottom: 30px;
+
+        h2 {
+          font-size: v.$text-2xl;
+        }
+
+        p {
+          font-size: v.$text-xs;
+        }
+      }
+    }
+
+    &-list {
+      display: flex;
+      justify-content: center;
+      gap: v.$spacing-unit * 2;
+      margin-top: 60px;
+
+      @media (max-width: v.$breakpoint-md) {
+        flex-direction: column;
+        margin-top: v.$spacing-unit * 2.5;
+      }
+
+      .customer-card {
+        background-color: v.$color-background;
+        box-shadow: 0 20px 80px 0 rgb(193 199 212 / 70.2%);
+        max-width: 1300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: v.$spacing-unit * 5;
+        gap: v.$spacing-unit * 3;
+
+        @media (max-width: v.$breakpoint-md) {
+          gap: v.$spacing-unit * 1;
+
+          p {
+            font-size: v.$text-xs;
+          }
+        }
+
+        .customer-name {
+          font-weight: 700;
+          color: v.$color-primary;
+        }
+      }
+    }
+  }
+
+  &__selected {
+    @include mixin.container;
+
+    padding-top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (min-width: v.$breakpoint-lg) and (max-width: v.$breakpoint-2xl) {
+      @include mixin.container(115px 70px);
+
+      padding-top: 0;
+    }
+
+    @media (min-width: v.$breakpoint-md) and (max-width: v.$breakpoint-lg) {
+      @include mixin.container(115px 80px);
+
+      padding-top: 0;
+    }
+
+    @media (max-width: v.$breakpoint-md) {
+      @include mixin.container(80px 80px);
+
+      padding-top: 0;
+    }
+
+    &-title {
+      margin-bottom: v.$spacing-unit * 7.5;
+      text-align: center;
+
+      p {
+        color: v.$color-description;
+      }
+
+      @media (max-width: v.$breakpoint-md) {
+        margin-bottom: 30px;
+
+        h2 {
+          font-size: v.$text-2xl;
+        }
+
+        p {
+          font-size: v.$text-xs;
+        }
+      }
+
+      @media (min-width: v.$breakpoint-md) and (max-width: v.$breakpoint-lg) {
+        margin-bottom: 30px;
+      }
+    }
+
+    &-container {
+      max-width: 1300px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: v.$spacing-unit * 3;
+
+      @media (min-width: v.$breakpoint-lg) and (max-width: v.$breakpoint-2xl) {
+        gap: v.$spacing-unit * 1;
+      }
+
+      @media (max-width: v.$breakpoint-lg) {
+        flex-direction: column;
+        gap: v.$spacing-unit * 5;
+      }
+    }
+  }
+
+  &__arrival {
+    @include mixin.container;
+
+    padding-bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (min-width: v.$breakpoint-lg) and (max-width: v.$breakpoint-2xl) {
+      @include mixin.container(115px 70px);
+    }
+
+    @media (min-width: v.$breakpoint-md) and (max-width: v.$breakpoint-lg) {
+      @include mixin.container(115px 80px);
+    }
+
+    @media (max-width: v.$breakpoint-md) {
+      @include mixin.container(80px 80px);
+    }
+
+    &-title {
+      margin-bottom: v.$spacing-unit * 7.5;
+      text-align: center;
+
+      p {
+        color: v.$color-description;
+      }
+
+      @media (max-width: v.$breakpoint-md) {
+        margin-bottom: 30px;
+
+        h2 {
+          font-size: v.$text-2xl;
+        }
+
+        p {
+          font-size: v.$text-xs;
+        }
+      }
+
+      @media (min-width: v.$breakpoint-md) and (max-width: v.$breakpoint-lg) {
+        margin-bottom: 30px;
+      }
+    }
+
+    &-container {
+      max-width: 1300px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: v.$spacing-unit * 3;
+
+      @media (min-width: v.$breakpoint-lg) and (max-width: v.$breakpoint-2xl) {
+        gap: v.$spacing-unit * 1;
+      }
+
+      @media (max-width: v.$breakpoint-lg) {
+        flex-direction: column;
+        gap: v.$spacing-unit * 5;
+      }
+    }
+  }
+}
+
+label.required {
+  @include mixin.element-required;
+}
+
+// Visually hidden class to improve accessibility
+// Based on: https://www.a11yproject.com/posts/how-to-hide-content/
+.visually-hidden {
+  // stylelint-disable-next-line property-no-deprecated
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
